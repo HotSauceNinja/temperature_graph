@@ -2,6 +2,7 @@
   --base-color: #05344e;
   --base-color-light: #576e7a;
   --secondary-color: #fff;
+  --error-color: #f90000;
 }
 
 .app {
@@ -10,7 +11,7 @@
 
 .app-header {
   background-color: var(--base-color);
-  min-height: 20vh;
+  min-height: 15vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,14 +26,34 @@
   min-height: 80vh;
 }
 
+.temperature-input-container,
+.temperature-graph-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.temperature-input-container {
+  height: 35vh;
+}
+
+.temperature-graph-container {
+  height: 50vh;
+}
+
 .description-text {
   color: var(--base-color);
 }
+
 .info-text {
   color: var(--base-color-light);
   height: 100%;
 }
 
+.error-text {
+  color: var(--error-color);
+}
 .temperatures-input {
   color: var(--base-color-light);
   width: 60vw;

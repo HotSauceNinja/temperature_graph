@@ -16,12 +16,11 @@ app.post("/api/temperatures", async (req, res) => {
         errorMessage: "Invalid temperatures format. Please check your input.",
       });
     }
-
+    const temperaturesArray = submittedTemperatures.split(" ");
     const temperatureClosestToZero = findClosestToZero(
       submittedTemperatures.split(" ")
     );
-    console.log("Temperature closest to zero:", temperatureClosestToZero);
-    res.send({ temperatureClosestToZero });
+    res.send({ temperatureClosestToZero, temperaturesArray });
   } catch (error) {
     res.status(404).send({
       error: true,
