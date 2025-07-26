@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import TempGraph from "./components/TempGraph/TempGraph";
 
 function App() {
   const [submittedTemperatures, setSubmittedTemperatures] = useState("");
@@ -27,7 +28,6 @@ function App() {
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.log("Error Data", errorData);
 
       setErrorMessage(
         errorData.errorMessage || "Something went wrong, please try again."
@@ -44,6 +44,9 @@ function App() {
   };
 
   const handleInputChange = (value) => {
+    if (graphData.length > 0) {
+      setGraphData([]);
+    }
     setErrorMessage(null);
     setSubmittedTemperatures(value);
   };
@@ -100,15 +103,13 @@ function App() {
         <div className="temperature-graph-container">
           <h2 className="description-text">Temperature Graph</h2>
 
-          {graphData && graphData.length > 0 ? (
-            <div className="temperature-graph-placeholder">
-              <p>Graph goes here</p>
-            </div>
-          ) : (
+          {submittedTemperatures.trim().length === 0 ? (
             <p className="description-text">
               The graph will be displayed here once the temperatures are
               submitted.
             </p>
+          ) : (
+            <TempGraph graphData={graphData} />
           )}
         </div>
       </div>
