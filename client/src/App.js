@@ -12,11 +12,16 @@ function App() {
   //     .catch((err) => console.log('Fetch error:', err));
   // }, []);
 
-  function handleSubmit() {
-    console.log("Submitted temperatures handle submit called");
-  }
+  const handleSubmit = async () => {
+    const response = await fetch("/api/temperatures", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ submittedTemperatures }),
+    });
 
-  console.log("submittedTemperatures", submittedTemperatures);
+    const data = await response.json();
+    console.log(" DATA ", data);
+  };
 
   return (
     <div className="app">
