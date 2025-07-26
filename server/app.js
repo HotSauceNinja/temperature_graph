@@ -1,4 +1,5 @@
 import express from "express";
+import { findClosestToZero } from "./utils/findClosestToZero.js";
 import { validateTemperatures } from "./utils/validateTemperatures.js";
 
 const app = express();
@@ -16,8 +17,11 @@ app.post("/api/temperatures", async (req, res) => {
       });
     }
 
-    const temperaturesArray = submittedTemperatures.split(" ");
-    res.send({ temperaturesArray });
+    const temperatureClosestToZero = findClosestToZero(
+      submittedTemperatures.split(" ")
+    );
+    console.log("Temperature closest to zero:", temperatureClosestToZero);
+    res.send({ temperatureClosestToZero });
   } catch (error) {
     res.status(404).send({
       error: true,
