@@ -1,0 +1,14 @@
+{
+  "name": "temperature_graph",
+  "version": "1.0.0",
+  "description": "Temperature recording and visualisation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sandra Spighel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
