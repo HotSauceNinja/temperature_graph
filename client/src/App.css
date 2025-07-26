@@ -1,31 +1,59 @@
-.App {
+:root {
+  --base-color: #05344e;
+  --base-color-light: #576e7a;
+  --secondary-color: #fff;
+}
+
+.app {
   text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #fff;
+.app-header {
+  background-color: var(--base-color);
   min-height: 20vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: black;
+  color: var(--secondary-color);
 }
 
-.App-main {
+.app-content {
   padding: 20px;
-  background-color: #f0f0f0;
+  background-color: var(--secondary-color);
   min-height: 80vh;
 }
 
-.App-link {
-  color: #61dafb;
+.description-text {
+  color: var(--base-color);
+}
+.info-text {
+  color: var(--base-color-light);
+  height: 100%;
 }
 
+.temperatures-input {
+  color: var(--base-color-light);
+  width: 60vw;
+  max-width: 500px;
+  height: 25px;
+  padding: 8px;
+  border: 1px solid var(--base-color);
+  border-radius: 8px;
+}
+
+.primary-button {
+  background-color: var(--base-color-light);
+
+  color: var(--secondary-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+
+  &:hover {
+    background-color: var(--base-color);
+  }
+}
