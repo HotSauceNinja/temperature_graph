@@ -5,15 +5,13 @@ import TempGraph from "./components/TempGraph/TempGraph";
 function App() {
   const [submittedTemperatures, setSubmittedTemperatures] = useState("");
   const [graphData, setGraphData] = useState([]);
+  const [tempClosestToZero, setTempClosestToZero] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-  // const [message, setMessage] = useState('');
 
-  // useEffect(() => {
-  //   fetch('/api')
-  //     .then((res) => res.text())
-  //     .then((data) => setMessage(data))
-  //     .catch((err) => console.log('Fetch error:', err));
-  // }, []);
+  const resetValues = () => {
+    setGraphData([]);
+    setTempClosestToZero(null);
+  };
 
   const handleSubmit = async () => {
     setErrorMessage(null);
@@ -32,20 +30,20 @@ function App() {
       setErrorMessage(
         errorData.errorMessage || "Something went wrong, please try again."
       );
-      setGraphData([]);
+      resetValues();
       return;
     }
 
     const data = await response.json();
-    console.log("DATA", data);
 
     setErrorMessage(null);
     setGraphData(data.temperaturesArray);
+    setTempClosestToZero(Number(data.temperatureClosestToZero));
   };
 
   const handleInputChange = (value) => {
     if (graphData.length > 0) {
-      setGraphData([]);
+      resetValues();
     }
     setErrorMessage(null);
     setSubmittedTemperatures(value);
@@ -74,14 +72,13 @@ function App() {
             onChange={(e) => handleInputChange(e.target.value)}
           />
 
-          {submittedTemperatures &&
-          submittedTemperatures.trim().length > 0 &&
-          errorMessage ? (
+          {submittedTemperatures && submittedTemperatures.trim().length > 0 && (
             <div>
-              <p className="error-text">{errorMessage}</p>
-            </div>
-          ) : (
-            <div>
+              {errorMessage && (
+                <div>
+                  <p className="error-text">{errorMessage}</p>
+                </div>
+              )}
               {submittedTemperatures.trim().length > 0 ? (
                 <p className="info-text">
                   You have entered: {submittedTemperatures}
@@ -91,7 +88,6 @@ function App() {
                   Please enter temperatures to display them.
                 </p>
               )}
-
               {submittedTemperatures && (
                 <button className="primary-button" onClick={handleSubmit}>
                   Display on Graph
@@ -103,7 +99,10 @@ function App() {
         <div className="temperature-graph-container">
           <h2 className="description-text">Temperature Graph</h2>
 
-          <TempGraph graphData={graphData} />
+          <TempGraph
+            graphData={graphData}
+            tempClosestToZero={tempClosestToZero}
+          />
         </div>
       </div>
     </div>

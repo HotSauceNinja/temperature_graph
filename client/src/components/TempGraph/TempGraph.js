@@ -1,6 +1,6 @@
 import "./TempGraph.css";
 
-function TempGraph({ graphData }) {
+function TempGraph({ graphData, tempClosestToZero }) {
   const maxHeight = Math.max(...graphData.map((d) => Math.abs(d)));
 
   const normaliseBarHeight = (barHeight) => {
@@ -8,11 +8,15 @@ function TempGraph({ graphData }) {
     return (Math.abs(barHeight) / maxHeight) * 200;
   };
 
+  const isClosestToZero = (value) => {
+    return Number(tempClosestToZero) === Number(value);
+  };
+
   return (
     <div className="overall-container">
       <div>0</div>
       <div className="graph-container">
-        <p className="x-description">Hot</p>
+        <p className="x-description positive">Hot</p>
         <div className="x-container">
           <div className="x-axis"></div>
           <div className="graph-areas-container">
@@ -21,18 +25,26 @@ function TempGraph({ graphData }) {
               <div key={index} className="bar-wrapper">
                 <div
                   key={index}
-                  className={`bar ${value >= 0 ? "positive" : "negative"}`}
+                  className={`bar ${
+                    value >= 0 ? "positive-bar" : "negative-bar"
+                  }`}
                   style={{
                     height: `${normaliseBarHeight(value)}px`,
                   }}
                 >
-                  {value}
+                  <p
+                    className={
+                      isClosestToZero(value) ? "highlighted" : "regular"
+                    }
+                  >
+                    {value}
+                  </p>
                 </div>
               </div>
             ))}
           </div>
         </div>
-        <p className="x-description">Cold</p>
+        <p className="x-description negative">Cold</p>
       </div>
     </div>
   );
