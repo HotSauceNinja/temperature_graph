@@ -1,18 +1,12 @@
 import "./TempGraph.css";
 
 function TempGraph({ graphData }) {
-  const mockData = [-5, +4, -10, -6, +8, -1.4, +3.2, -2.5, +7, 5];
+  const maxHeight = Math.max(...graphData.map((d) => Math.abs(d)));
 
-  const normaliseBarHeight = (data) => {
-    const maxHeight = Math.max(...data.map((d) => Math.abs(d)));
-    // Determine each bar height by finding how tall it is compared with highest, then multiplying with max number of px
-    const normalisedData = data.map((d) => (d / maxHeight) * 200);
-    return normalisedData;
+  const normaliseBarHeight = (barHeight) => {
+    // Determine bar height by finding how tall it is compared with highest, then multiplying with max number of px
+    return (Math.abs(barHeight) / maxHeight) * 200;
   };
-  console.log(
-    "normaliseBarHeight ",
-    normaliseBarHeight([-5, +4, -10, -6, +8, -1.4, +3.2, -2.5, +7, 5])
-  );
 
   return (
     <div className="overall-container">
@@ -22,9 +16,20 @@ function TempGraph({ graphData }) {
         <div className="x-container">
           <div className="x-axis"></div>
           <div className="graph-areas-container">
-            <div className="positive"></div>
             <div className="y-axis"></div>
-            <div className="negative"></div>
+            {graphData.map((value, index) => (
+              <div key={index} className="bar-wrapper">
+                <div
+                  key={index}
+                  className={`bar ${value >= 0 ? "positive" : "negative"}`}
+                  style={{
+                    height: `${normaliseBarHeight(value)}px`,
+                  }}
+                >
+                  {value}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <p className="x-description">Cold</p>
