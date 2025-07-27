@@ -103,14 +103,7 @@ function App() {
         <div className="temperature-graph-container">
           <h2 className="description-text">Temperature Graph</h2>
 
-          {submittedTemperatures.trim().length === 0 ? (
-            <p className="description-text">
-              The graph will be displayed here once the temperatures are
-              submitted.
-            </p>
-          ) : (
-            <TempGraph graphData={graphData} />
-          )}
+          <TempGraph graphData={graphData} />
         </div>
       </div>
     </div>

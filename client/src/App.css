@@ -35,11 +35,12 @@
 }
 
 .temperature-input-container {
-  height: 35vh;
+  max-height: 35vh;
 }
 
 .temperature-graph-container {
   height: 50vh;
+  min-height: 420px;
 }
 
 .description-text {
