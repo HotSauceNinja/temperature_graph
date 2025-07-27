@@ -35,6 +35,7 @@ While developing this web app, I made a few decisions which I will list below, w
 
 Possible extensions / Further thoughts:
 
+- Add tests for the client as well
 - I'd opt for keeping all calculations in the same place (API returns max height and closest to zero)
 - Possible extension: Generating bar widths dynamically based on how many values we have in the array. This would allow graph to scale visually, ensuring that all bars fit within the container regardless of how many temperatures are submitted.
 - Allowing user adds to add positive values without having to type in '+'
